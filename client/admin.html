@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JobSetu Admin Panel</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fc;
+padding:30px;
+}
+
+h1{
+text-align:center;
+margin-bottom:30px;
+color:#003366;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.card h2{
+margin-bottom:15px;
+color:#003366;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#003366;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#0055aa;
+}
+
+</style>
+
+</head>
+<body>
+    <button id="logoutBtn">
+    Logout
+</button>
+
+<h1>JobSetu Admin Dashboard</h1>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Add Job</h2>
+
+<form id="jobForm">
+
+<input type="text" id="jobTitle" placeholder="Job Title" required>
+
+<input type="text" id="organization" placeholder="Organization" required>
+
+<input type="text" id="lastDate" placeholder="Last Date" required>
+
+<input type="url" id="applyLink" placeholder="Apply Link" required>
+
+<button type="submit">Add Job</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h2>Add Result</h2>
+
+<form id="resultForm">
+
+<input type="text" id="resultTitle" placeholder="Result Title" required>
+
+<input type="url" id="resultLink" placeholder="Result Link" required>
+
+<button type="submit">Add Result</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h2>Add Admit Card</h2>
+
+<form id="admitForm">
+
+<input type="text" id="admitTitle" placeholder="Exam Name" required>
+
+<input type="url" id="admitLink" placeholder="Admit Card Link" required>
+
+<button type="submit">Add Admit Card</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h2>Add Answer Key</h2>
+
+<form id="answerForm">
+
+<input type="text" id="answerTitle" placeholder="Exam Name" required>
+
+<input type="url" id="answerLink" placeholder="Answer Key Link" required>
+
+<button type="submit">Add Answer Key</button>
+
+</form>
+
+</div>
+
+</div>
+
+<hr style="margin:40px 0;">
+
+<h2>All Jobs</h2>
+
+<div id="jobList"></div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
