@@ -36,16 +36,22 @@ app.use("/api", answerKeyRoutes);
 app.use("/api", contactRoutes);
 app.use("/api", adminRoutes);
 
-// Frontend Static Files Serve karna (Client folder ko link karna)
+// ... baaki saare codes aur API routes ke niche ...
+
+// Frontend Static Files Serve karna
 app.use(express.static(path.resolve(__dirname, "..", "client")));
 
-// Correct Catch-All Route for Express newer versions
-app.get("(.*)", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "..", "client", "index.html"));
+// ❌ Purane app.get("(.*)", ...) ko hata kar yeh likhiye:
+app.use((req, res, next) => {
+    // Agar koi API route nahi hai, toh seedhe index.html serve karo
+    if (!req.path.startsWith('/api')) {
+        return res.sendFile(path.resolve(__dirname, "..", "client", "index.html"));
+    }
+    next();
 });
 
+// Port configuration
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
     console.log(`🚀 Server Running on Port ${PORT}`);
 });
