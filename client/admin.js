@@ -1,20 +1,14 @@
-// ==========================================
-// DYNAMIC API URL (Local aur Render dono ke liye)
-// ==========================================
+// Dynamic API URL (Local aur Render dono ke liye)
 const API_URL = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
     ? "https://jobsetu-backend.onrender.com/api"
     : "/api";
 
-// =========================
 // LOGIN PROTECTION
-// =========================
 if (localStorage.getItem("adminLoggedIn") !== "true") {
     window.location.href = "login.html";
 }
 
-// =========================
 // ADD JOB
-// =========================
 document.getElementById("jobForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -37,16 +31,14 @@ document.getElementById("jobForm").addEventListener("submit", async (e) => {
         const result = await response.json();
         alert(result.message);
         document.getElementById("jobForm").reset();
-        loadJobs(); // Refresh the list after adding
+        loadJobs();
     } catch (error) {
         console.log(error);
         alert("Error adding job");
     }
 });
 
-// =========================
 // ADD RESULT
-// =========================
 document.getElementById("resultForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -73,9 +65,7 @@ document.getElementById("resultForm").addEventListener("submit", async (e) => {
     }
 });
 
-// =========================
 // ADD ADMIT CARD
-// =========================
 document.getElementById("admitForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -102,9 +92,7 @@ document.getElementById("admitForm").addEventListener("submit", async (e) => {
     }
 });
 
-// =========================
 // ADD ANSWER KEY
-// =========================
 document.getElementById("answerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -131,9 +119,7 @@ document.getElementById("answerForm").addEventListener("submit", async (e) => {
     }
 });
 
-// =========================
 // LOAD ALL JOBS
-// =========================
 async function loadJobs() {
     try {
         const response = await fetch(`${API_URL}/jobs`);
@@ -160,9 +146,7 @@ async function loadJobs() {
     }
 }
 
-// =========================
 // DELETE JOB
-// =========================
 async function deleteJob(id) {
     const confirmDelete = confirm("Are you sure you want to delete?");
     if (!confirmDelete) return;
@@ -180,14 +164,10 @@ async function deleteJob(id) {
     }
 }
 
-// =========================
 // INITIAL LOAD
-// =========================
 loadJobs();
 
-// =========================
 // LOGOUT
-// =========================
 const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {

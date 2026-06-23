@@ -1,6 +1,4 @@
-// ==========================================
-// DYNAMIC API URL (Local aur Render dono ke liye)
-// ==========================================
+// Dynamic API URL (Local aur Render dono ke liye)
 const API_URL = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
     ? "https://jobsetu-backend.onrender.com/api"
     : "/api";
@@ -14,7 +12,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     };
 
     try {
-        // Updated line to use dynamic API_URL
         const response = await fetch(`${API_URL}/admin-login`, {
             method: "POST",
             headers: {

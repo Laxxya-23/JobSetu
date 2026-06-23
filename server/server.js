@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path"); // Paths handle karne ke liye
+const path = require("path");
 
 const adminRoutes = require("./routes/adminRoutes");
 const jobRoutes = require("./routes/jobRoutes");
@@ -36,21 +36,22 @@ app.use("/api", answerKeyRoutes);
 app.use("/api", contactRoutes);
 app.use("/api", adminRoutes);
 
-// ... baaki saare codes aur API routes ke niche ...
-
 // Frontend Static Files Serve karna
 app.use(express.static(path.resolve(__dirname, "..", "client")));
 
-// ❌ Purane app.get("(.*)", ...) ko hata kar yeh likhiye:
+// Safe Middleware Catch-All for all HTML pages
 app.use((req, res, next) => {
-    // Agar koi API route nahi hai, toh seedhe index.html serve karo
     if (!req.path.startsWith('/api')) {
+        // Agar request kisi specific HTML file ke liye hai (jaise /login.html)
+        if (req.path.endsWith('.html')) {
+            return res.sendFile(path.resolve(__dirname, "..", "client", req.path.replace(/^\//, "")));
+        }
+        // Default index.html serve karo
         return res.sendFile(path.resolve(__dirname, "..", "client", "index.html"));
     }
     next();
 });
 
-// Port configuration
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server Running on Port ${PORT}`);
